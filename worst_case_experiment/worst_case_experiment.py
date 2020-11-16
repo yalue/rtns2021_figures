@@ -81,7 +81,7 @@ def generate_configs():
     to_return.append(json.dumps(overall_config))
     # Uneven partitioned
     mm1024_config["label"] = "Partitioned, w/ Additional Shared CU"
-    mm1024_config["log_name"] = "./results/1024_vs_1024_unevenly_partioned.json"
+    mm1024_config["log_name"] = "./results/1024_vs_1024_unevenly_partitioned.json"
     mm1024_config["compute_unit_mask"] = "10" * 29 + "11"
     to_return.append(json.dumps(overall_config))
 
