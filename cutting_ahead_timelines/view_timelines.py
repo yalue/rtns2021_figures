@@ -231,7 +231,7 @@ def set_axes_dimensions(axes, min_x, max_x, min_y, max_y):
     axes.set_xticks(numpy.arange(min_x, max_x + x_pad, x_range / 5.0))
     axes.set_xlim(min_x - x_pad, max_x + x_pad)
     # This is a bit different here for the paper--always have a max y of 175000
-    axes.set_ylim(min_y - y_pad, 175000)
+    axes.set_ylim(min_y - y_pad, 160000)
 
 def plugin_sort_key(plugin):
     """Returns the key that may be used to sort plugins by label."""

@@ -33,6 +33,7 @@ def generate_configs():
             "skip_copy": True
         }
     }
+
     # Create a couple explicit "isolated" plugin configs in case we want to
     # include "isolated" curves on later plots.
     mm1024_isolated = copy.deepcopy(mm1024_config)
@@ -89,6 +90,39 @@ def generate_configs():
     mm256_config["log_name"] = "./results/mm256_unequal_partitioned.json"
     overall_config["name"] = "MM1024 vs MM256, Uneven Partitioned Sharing"
     overall_config["plugins"] = [mm1024_config, mm256_config]
+    to_return.append(json.dumps(overall_config))
+
+    # Last plot, a thorough examination of MM1024 vs. itself in many different
+    # configurations. First, isolated:
+    mm1024_config = copy.deepcopy(mm1024_isolated)
+    mm1024_config["label"] = "Isolated"
+    mm1024_config["log_name"] = "./results/mm1024_isolated_exp2.json"
+    overall_config["name"] = "Various MM1024-only Configurations"
+    overall_config["plugins"] = [mm1024_config]
+    to_return.append(json.dumps(overall_config))
+
+    # Second, vs. an identical competitor on the full GPU:
+    mm1024_competitor = copy.deepcopy(mm1024_isolated)
+    mm1024_competitor["log_name"] = "/dev/null"
+    mm1024_competitor["label"] = "competitor"
+    mm1024_config["label"] = "Unpartitioned Sharing vs. Identical Competitor"
+    mm1024_config["log_name"] = "./results/mm1024_full_shared_exp2.json"
+    overall_config["plugins"] = [mm1024_config, mm1024_competitor]
+    to_return.append(json.dumps(overall_config))
+
+    # Third, vs. an identical competitor on equal partitions
+    mm1024_competitor["compute_unit_mask"] = "01" * 30
+    mm1024_config["compute_unit_mask"] = "10" * 30
+    mm1024_config["label"] = "Evenly Partitioned with Identical Competitor"
+    mm1024_config["log_name"] = "./results/mm1024_even_partitioned_shared_exp2.json"
+    overall_config["plugins"] = [mm1024_config, mm1024_competitor]
+    to_return.append(json.dumps(overall_config))
+
+    # Third, vs. an identical competitor on unequal partitions
+    mm1024_config["compute_unit_mask"] = "10" * 29 + "11"
+    mm1024_config["label"] = "Unevenly Partitioned with Identical Competitor"
+    mm1024_config["log_name"] = "./results/mm1024_uneven_partitioned_shared_exp2.json"
+    overall_config["plugins"] = [mm1024_config, mm1024_competitor]
     to_return.append(json.dumps(overall_config))
 
     return to_return
