@@ -1,7 +1,5 @@
 # This is a quick script that runs four scenarios with different CU masks of
 # MM1024 vs MM256.
-import argparse
-import copy
 import json
 import subprocess
 import time
@@ -53,7 +51,7 @@ def generate_configs():
     # Second experiment: Un-striped uneven CU masks
     overall_config["name"] = "MM1024 vs MM256 (Unstriped Uneven Partitions)"
     mm1024_config["compute_unit_mask"] = "0" * 29 + "1" * 31
-    mm1024_config["log_name"] = "./results/mm1024_unstriped_uneven.json",
+    mm1024_config["log_name"] = "./results/mm1024_unstriped_uneven.json"
     to_return.append(json.dumps(overall_config))
 
     # We already have data for striped even and striped uneven.
@@ -61,13 +59,8 @@ def generate_configs():
     return to_return
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--start_experiment", type=int, default=1,
-        help="The number of the first experiment to resume from, for use if "+
-            "one of the tests hangs.")
-    args = parser.parse_args()
     configs = generate_configs()
-    for i in range(args.start_experiment - 1, len(configs)):
+    for i in range(len(configs)):
         print("Running experiment %d of %d" % (i + 1, len(configs)))
         config = configs[i]
         process = subprocess.Popen(["./bin/runner", "-"],
