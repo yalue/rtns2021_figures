@@ -41,7 +41,7 @@ def generate_configs():
     overall_config = {
         "name": "MM1024 vs MM1024",
         "max_iterations": 0,
-        "max_time": 10.0,
+        "max_time": 60.0,
         "gpu_device_id": 0,
         "pin_cpus": True,
         "do_warmup": True,
