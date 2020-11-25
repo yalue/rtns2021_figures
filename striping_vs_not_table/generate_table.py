@@ -36,7 +36,7 @@ print(r'Scenario & \mmsbig{} CU Mask & \mmsmall{} CU Mask & Min & Max & Median &
 print(r'\hline')
 print_table_row("./1024_vs_256_evenly_partitioned.json", r'\texttt{1010}...\texttt{101\textbf{0}}', r'\texttt{0101}...\texttt{0101}', "Striped, Equal Partitions")
 print_table_row("./1024_vs_256_unevenly_partitioned.json", r'\texttt{1010}...\texttt{101\textbf{1}}', r'\texttt{0101}...\texttt{0101}', "Striped, Unequal Partitions")
-print_table_row("./mm1024_unstriped_even.json", r'\texttt{0000}...\texttt{0\textbf{0}11}...\texttt{1111}', r'\texttt{1111}...\texttt{1100}...\texttt{0000}', "Unstriped, Equal Partitions")
-print_table_row("./mm1024_unstriped_uneven.json", r'\texttt{0000}...\texttt{0\textbf{1}11}...\texttt{1111}', r'\texttt{1111}...\texttt{1100}...\texttt{0000}', "Unstriped, Unequal Partitions")
+print_table_row("./mm1024_unstriped_even.json", r'\texttt{1111}...\texttt{000\textbf{0}}', r'\texttt{0000}...\texttt{1111}', "Unstriped, Equal Partitions")
+print_table_row("./mm1024_unstriped_uneven.json", r'\texttt{1111}...\texttt{000\textbf{1}}', r'\texttt{0000}...\texttt{1111}', "Unstriped, Unequal Partitions")
 print(r'\hline')
 

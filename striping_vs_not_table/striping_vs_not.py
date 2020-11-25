@@ -14,7 +14,7 @@ def generate_configs():
         "log_name": "./results/mm1024_unstriped_even.json",
         "thread_count": 1024,
         "block_count": 1,
-        "compute_unit_mask": "0" * 30 + "1" * 30,
+        "compute_unit_mask": "1" * 30 + "0" * 30,
         "additional_info": {
             "matrix_width": 1024,
             "skip_copy": True
@@ -26,7 +26,7 @@ def generate_configs():
         "log_name": "/dev/null",
         "thread_count": 256,
         "block_count": 1,
-        "compute_unit_mask": "1" * 30 + "0" * 30,
+        "compute_unit_mask": "0" * 30 + "1" * 30,
         "additional_info": {
             "matrix_width": 1024,
             "skip_copy": True
@@ -50,7 +50,7 @@ def generate_configs():
 
     # Second experiment: Un-striped uneven CU masks
     overall_config["name"] = "MM1024 vs MM256 (Unstriped Uneven Partitions)"
-    mm1024_config["compute_unit_mask"] = "0" * 29 + "1" * 31
+    mm1024_config["compute_unit_mask"] = "1" * 30 + "0" * 29 + "1"
     mm1024_config["log_name"] = "./results/mm1024_unstriped_uneven.json"
     to_return.append(json.dumps(overall_config))
 

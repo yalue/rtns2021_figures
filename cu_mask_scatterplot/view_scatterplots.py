@@ -70,8 +70,9 @@ def add_plot_padding(axes):
     x_pad = x_range * 0.05
     axes.set_ylim(y_limits[0] - y_pad, y_limits[1] + y_pad)
     axes.set_xlim(x_limits[0] - x_pad, x_limits[1] + x_pad)
-    axes.xaxis.set_ticks(numpy.arange(x_limits[0], x_limits[1] + x_pad,
-        x_range / 5.0))
+    #axes.xaxis.set_ticks(numpy.arange(x_limits[0], x_limits[1] + x_pad,
+    #    x_range / 5.0))
+    axes.xaxis.set_ticks([1, 15, 30, 45, 60])
     axes.yaxis.set_ticks(numpy.arange(y_limits[0], y_limits[1] + y_pad,
         y_range / 5.0))
     return None
@@ -88,30 +89,29 @@ def get_marker_styles():
         "mec": "k",
         "mew": 0,
         "fillstyle": "full",
-        "ms": 5,
+        "ms": 4,
         "color": "k",
     }
     style_2 = copy.deepcopy(base_style)
     style_2["marker"] = "s"
-    style_2["ms"] = 6
-    style_2["mec"] = "gray"
-    style_2["mfc"] = "gray"
+    style_2["ms"] = 5
+    style_2["mec"] = "0.7"
+    style_2["mfc"] = "0.7"
     return [style_2, base_style]
 
 def add_scenario_to_plot(axes, scenario, name, style_dict):
     data = scenario_to_distribution(scenario)
     # data[0] = x vals, data[1] = min, data[2] = max, data[3] = avg
+    if "stripe width" in name:
+        name = "Stripe width: 4"
+    else:
+        name = "Unstriped"
     axes.plot(data[0], data[3], label=name, **style_dict)
-#    axes.plot(data[0], data[2], label="Max", linestyle="None", marker="^",
-#        fillstyle="full", markeredgewidth=0.0, ms=7)
-#    axes.plot(data[0], data[3], label="Average", linestyle="None", marker="*",
-#        fillstyle="full", markeredgewidth=0.0, ms=8)
-#    axes.plot(data[0], data[1], label="Min", linestyle="None", marker="v",
-#        fillstyle="full", markeredgewidth=0.0, ms=7)
     axes.set_ylabel("Average MM1024 Time (ms)")
     axes.set_xlabel("CU Partition Size (# of CUs)")
     legend = plot.legend()
-    legend.draggable()
+    #legend.draggable()
+    legend.set_draggable(True)
     return None
 
 def show_plots(filenames, times_key):
@@ -154,6 +154,7 @@ def show_plots(filenames, times_key):
         add_scenario_to_plot(axes, all_scenarios[name], name,
             next(style_cycler))
     add_plot_padding(axes)
+    plot.subplots_adjust(bottom=0.35)
     plot.show()
 
 if __name__ == "__main__":
