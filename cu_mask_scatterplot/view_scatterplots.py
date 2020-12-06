@@ -103,9 +103,9 @@ def add_scenario_to_plot(axes, scenario, name, style_dict):
     data = scenario_to_distribution(scenario)
     # data[0] = x vals, data[1] = min, data[2] = max, data[3] = avg
     if "stripe width" in name:
-        name = "Stripe width: 4"
+        name = "SE-packed"
     else:
-        name = "Unstriped"
+        name = "SE-distributed"
     axes.plot(data[0], data[3], label=name, **style_dict)
     axes.set_ylabel("Average MM1024 Time (ms)")
     axes.set_xlabel("CU Partition Size (# of CUs)")
