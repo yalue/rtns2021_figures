@@ -16,7 +16,7 @@ def generate_configs():
         "label": "MM1024",
         "log_name": "./results/mm1024_isolated.json",
         "filename": "./bin/matrix_multiply.so",
-        "thread_count": 1024,
+        "thread_count": [32, 32],
         "block_count": 1,
         "additional_info": {
             "matrix_width": 1024,
@@ -27,7 +27,7 @@ def generate_configs():
         "label": "MM256",
         "log_name": "./results/mm256_isolated.json",
         "filename": "./bin/matrix_multiply.so",
-        "thread_count": 256,
+        "thread_count": [16, 16],
         "block_count": 1,
         "additional_info": {
             "matrix_width": 1024,
